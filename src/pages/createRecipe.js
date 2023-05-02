@@ -33,7 +33,7 @@ const CreateRecipe = () => {
  ingredient[index]=value; 
  setRecipe({...recipe, ingredient})
   };
-
+  
   const handleSubmit= async(event)=>{
     event.preventDefault();
     try {
@@ -41,12 +41,23 @@ const CreateRecipe = () => {
       if(a==null){return alert("Login to add");}
       recipe.userOwner=a;
        
-     
-      const x=await axios.post("https://recipe-backend-api.vercel.app/recipes/createRecipe",recipe);
-      if(x.data.message==="success"){
-      navigate("/");}
-      console.log(x)
-      alert(x.data.message);
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'https://recipe-backend-api.vercel.app/recipes/createRecipe',
+        headers: { },
+        data : recipe
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        alert(response.data.message);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     } catch (error) { 
       console.log(" error while adding");
     }
