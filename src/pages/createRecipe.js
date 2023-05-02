@@ -45,6 +45,7 @@ const CreateRecipe = () => {
       const x=await axios.post("https://recipe-backend-api.vercel.app/recipes/createRecipe",recipe);
       if(x.data.message==="success"){
       navigate("/");}
+      console.log(x)
       alert(x.data.message);
     } catch (error) { 
       console.log(" error while adding");
