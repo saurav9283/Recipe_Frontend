@@ -42,8 +42,7 @@ const CreateRecipe = () => {
       recipe.userOwner=a;
        
      
-      const x=await axios.post("https://recipe-backend-api.vercel.app/recipes/createRecipe",recipe
-      ,{headers:{authorization:cookies.access}});
+      const x=await axios.post("https://recipe-backend-api.vercel.app/recipes/createRecipe",recipe);
       if(x.data.message==="success"){
       navigate("/");}
       alert(x.data.message);
