@@ -47,8 +47,8 @@ fetchSavedRecipe();}
     }
   };
  const isRecipeSaved=(id)=>{
-  console.log(savedRecipe.includes(id));
-   return savedRecipe.includes(id);
+  // console.log(savedRecipe.includes(id));
+   return savedRecipe?.includes(id);
  }
   return (
     <div className='home'>
