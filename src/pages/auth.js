@@ -168,8 +168,8 @@ const LoginForm = ({ onSubmit, onclick }) => {
         const response =await axios.post("https://recipe-backend-api.vercel.app/auth/login", {
         username:email,password
      });
-     if(response.data.message === "User does not Exist" )
-     alert("User does not Exist")
+     if(response.data.message === "Wrong Password" )
+     alert("Invalid Crediantials")
      else{
       setCookies("access",response.data.token);
       console.log(response)
