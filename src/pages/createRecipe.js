@@ -45,12 +45,12 @@ const CreateRecipe = () => {
         method: 'post',
         maxBodyLength: Infinity,
         url: 'https://recipe-backend-api.vercel.app/recipes/createRecipe',
-        headers: { },
         data : recipe
       };
       
       axios.request(config)
       .then((response) => {
+        console.log(config.data);
         console.log(JSON.stringify(response.data));
         alert(response.data.message);
         navigate("/");

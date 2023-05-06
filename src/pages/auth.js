@@ -172,7 +172,7 @@ const LoginForm = ({ onSubmit, onclick }) => {
      alert("User does not Exist")
      else{
       setCookies("access",response.data.token);
-        
+      console.log(response)
       window.localStorage.setItem("userID",response.data.userID);
      navigate('/');
      }
