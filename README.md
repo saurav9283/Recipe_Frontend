@@ -1,6 +1,6 @@
 ** USERID AND PASSWORD  **
 USERID   = s123
-PASSWORD = 12346
+PASSWORD = 123456
 
 # Getting Started with Create React App
 
