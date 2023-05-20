@@ -1,9 +1,12 @@
 import React from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import  "../components/navbar.css";
+
+
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -21,7 +24,7 @@ const NavbarContainer = styled.nav`
 const NavbarBrand = styled.h1`
   font-size: 24px;
   font-weight: bold;
-  color:white;
+  color:black;
   margin: 0;
 `;
 
@@ -29,8 +32,6 @@ const NavbarMenu = styled.ul`
   display: flex;
   
   list-style: none;
-  background-color:
-  
   justify-content:space-between;
   align-items:center;
   margin: 0;
@@ -96,7 +97,7 @@ const Navbar = () => {
   }
   return (
     <NavbarContainer>
-      <NavbarBrand>Recipees!</NavbarBrand>
+      <NavbarBrand>BestFOOD!</NavbarBrand>
       <NavbarMenu>
         <NavbarMenuItem>
           <NavbarLink exact to="/" activeClassName="active">

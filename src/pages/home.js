@@ -3,6 +3,7 @@ import React from 'react';
 import {useCookies} from "react-cookie";
 import { useState ,useEffect } from 'react'
 import { useGetUserID } from "../hooks/useGetuserID";
+import "../pages/home.css";
 const Home = () => {
   const [recipe,setRecipe]=useState([]);
   const [savedRecipe,setsavedRecipe]=useState([]);
@@ -52,7 +53,7 @@ fetchSavedRecipe();}
  }
   return (
     <div className='home'>
-      <h1>Recipes</h1>
+      <h1>BestFOODs here</h1>
       <div className='card-container'>
         {recipe?.map((recipe) => (
             

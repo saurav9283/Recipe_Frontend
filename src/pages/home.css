@@ -1,0 +1,6 @@
+.main-card{
+    cursor: pointer;
+}
+.main-card:hover{
+    transform: scale(0.9);
+}
