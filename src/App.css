@@ -163,6 +163,15 @@ p {
     border-radius: 10px;
     margin-top: 20px;
 }
+.Remove{
+  background: rgba(8, 8, 8, 0.2); color: white;
+  border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.8px);
+    -webkit-backdrop-filter: blur(4.8px);
+    border: 1px solid rgba(8, 8, 8, 0.48); width: 70px; height: 25px; transition: ease-in 0.1s;
+}
+.Remove:hover{ background-color: rgba(182, 182, 182, 0.721);  cursor: pointer;}
 
 .glow-on-hover:before {
     content: '';

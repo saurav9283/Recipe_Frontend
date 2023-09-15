@@ -165,14 +165,14 @@ const LoginForm = ({ onSubmit, onclick }) => {
      const handleSubmit=async (event)=>{
          event.preventDefault();
      try {
-        const response =await axios.post("https://recipe-backend-api.vercel.app/auth/login", {
+        const response =await axios.post("http://localhost:3001/auth/login", {
         username:email,password
      });
      if(response.data.message === "Wrong Password" )
      alert("Invalid Crediantials")
      else{
       setCookies("access",response.data.token);
-      console.log(response)
+      console.log(response.data)
       window.localStorage.setItem("userID",response.data.userID);
      navigate('/');
      }
@@ -214,7 +214,7 @@ const RegisterForm = ({ onSubmit, onclick }) => {
   const handleSubmit=async (event)=>{
           event.preventDefault();
       try {
-         const apple= await axios.post("https://recipe-backend-api.vercel.app/auth/register", {
+         const apple= await axios.post("http://localhost:3001/auth/register", {
              name,username:email,password
           });
           console.log(apple.data.message);
