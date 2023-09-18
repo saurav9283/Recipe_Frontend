@@ -1,5 +1,5 @@
-/* .NavbarContainer{
-display: flex;
+.NavbarContainer{
+  display: flex;
   justify-content: space-between;
   width:97%;
   align-items: center;
@@ -10,10 +10,3 @@ display: flex;
   height:45px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
-
-.part2{
- font-size: 24px;
- font-weight: bold;
- color:black;
- margin: 0;
-} */

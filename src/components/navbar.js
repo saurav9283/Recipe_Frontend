@@ -99,26 +99,26 @@ const Navbar = () => {
     <NavbarContainer>
       <NavbarBrand>BestFOOD!</NavbarBrand>
       <NavbarMenu>
-        <NavbarMenuItem>
-          <NavbarLink exact to="/" activeClassName="active">
+        <NavbarMenuItem >
+          <NavbarLink  exact to="/" activeClassName="active">
             Home
           </NavbarLink>
         </NavbarMenuItem>
-        <NavbarMenuItem>
-          <NavbarLink to="/createRecipe" activeClassName="active">
+        <NavbarMenuItem >
+          <NavbarLink  to="/createRecipe" activeClassName="active">
             Add
           </NavbarLink>
         </NavbarMenuItem>
-        <NavbarMenuItem>
-          <NavbarLink to="/savedRecipe" activeClassName="active">
+        <NavbarMenuItem >
+          <NavbarLink  to="/savedRecipe" activeClassName="active">
             Saved
           </NavbarLink>
         </NavbarMenuItem>
-        <NavbarMenuItem>
+        <NavbarMenuItem >
           
-          {!cookies.access? (<NavbarLink style={{"color":"white" }} to="/auth" activeClassName="active">
-          <Button style={{"alignSelf":"center" , "height":"40px", }}>Sign In</Button>  
-          </NavbarLink>):(<Button onClick={logout}>Logout</Button>)}
+          {!cookies.access? (<NavbarLink  style={{"color":"white" }} to="/auth" activeClassName="active">
+          <Button  style={{"alignSelf":"center" , "height":"40px", }}>Sign In</Button>  
+          </NavbarLink>):(<Button  onClick={logout}>Logout</Button>)}
         </NavbarMenuItem>
       </NavbarMenu>
     </NavbarContainer>

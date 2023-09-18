@@ -18,10 +18,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
-  width: 60vw;
+  height: 70vh;
+  width: 90vw;
   background-color: #9ba4b560;
-  margin-top: 80px;
+  margin-top: 50px;
   border-radius: 10px;
   backdrop-filter: blur(5px);
   }
