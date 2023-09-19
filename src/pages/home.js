@@ -66,7 +66,7 @@ const Home = () => {
     }
   };
   const isRecipeSaved = (id) => {
-    // console.log(savedRecipe.includes(id));
+    console.log(saveRecipe)
     return savedRecipe?.includes(id);
   };
   return (

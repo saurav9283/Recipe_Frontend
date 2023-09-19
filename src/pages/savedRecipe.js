@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 const SavedRecipe = () => {
   const [cookies, setCookies] = useCookies(["access"]);
   const [savedRecipe, setsavedRecipe] = useState([]);
+  const [ischange , setchange] = useState(false);
 
   const userID = useGetUserID();
   useEffect(() => {
@@ -23,8 +24,8 @@ const SavedRecipe = () => {
     if (cookies.access) {
       fetchSavedRecipe();
     }
-  }, []);
-  const removeRecipe = async (recipeID, userID) => {
+  }, [ischange]);
+  const removeRecipe = async (recipeID) => {
     try {
       const response = await axios.put(
         `https://recipe-backend-phi.vercel.app/recipes/remove/${userID}`,
@@ -36,7 +37,7 @@ const SavedRecipe = () => {
         }
       );
       console.log(response.data)
-      setsavedRecipe(response.data.savedRecipe);
+      setchange(!ischange)
     } catch (error) {
       console.error(error);
     }
