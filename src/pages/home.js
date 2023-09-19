@@ -28,7 +28,7 @@ const Home = () => {
     const fetchRecipe = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/recipes"
+          "https://recipe-backend-phi.vercel.app/recipes"
         );
         setRecipe(response.data);
       } catch (error) {
