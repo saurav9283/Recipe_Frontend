@@ -12,7 +12,7 @@ const SavedRecipe = () => {
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
-          `https://recipe-backend-phi.vercel.app/recipes/savedRecipe/${userID}`
+          `http://localhost:3001/recipes/savedRecipe/${userID}`
         );
         setsavedRecipe(response.data);
         console.log(response.data);
@@ -27,7 +27,7 @@ const SavedRecipe = () => {
   const removeRecipe = async (recipeID, userID) => {
     try {
       const response = await axios.put(
-        `https://recipe-backend-phi.vercel.app/recipes/remove/${userID}`,
+        `http://localhost:3001/recipes/remove/${userID}`,
         { recipeID },
         {
           headers: {

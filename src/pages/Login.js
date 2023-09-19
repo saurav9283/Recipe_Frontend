@@ -35,7 +35,7 @@ const LoginForm = ({ onSubmit, onclick }) => {
     if (handleValidation()) {
       try {
         const response = await axios.post(
-          "https://recipe-backend-phi.vercel.app/auth/login",
+          "http://localhost:3001/auth/login",
           {
             username: value.username,
             password: value.password,
@@ -50,6 +50,7 @@ const LoginForm = ({ onSubmit, onclick }) => {
           setCookies("access", response.data.token);
           window.localStorage.setItem("userID", response.data.userID);
           navigate("/");
+          toast.success("Login Successful", toastVariable);
         }
       } catch (error) {
         console.log(error);
@@ -90,7 +91,6 @@ const LoginForm = ({ onSubmit, onclick }) => {
           Don't have an account? Register
         </p>
       </form>
-      <ToastContainer />
     </div>
   );
 };

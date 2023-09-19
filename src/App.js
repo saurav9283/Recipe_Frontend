@@ -5,6 +5,7 @@ import Auth from "./pages/auth"
 import CreateRecipe from "./pages/createRecipe"
 import SavedRecipe from "./pages/savedRecipe"
 import Navbar from './components/navbar';
+import { ToastContainer } from 'react-toastify';
 function App() {
   
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/savedRecipe" element={<SavedRecipe/>}/>
         </Routes>
       </Router>
+      <ToastContainer />
     </div>
   );
 }
