@@ -15,7 +15,7 @@ const RegisterForm = ({ onSubmit, onclick }) => {
       event.preventDefault();
       try {
         const apple = await axios.post(
-          "https://recipe-backend-api.vercel.app/auth/register",
+          "https://recipe-backend-phi.vercel.app/auth/register",
           {
             name,
             username: email,

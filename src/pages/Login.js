@@ -35,7 +35,7 @@ const LoginForm = ({ onSubmit, onclick }) => {
     if (handleValidation()) {
       try {
         const response = await axios.post(
-          "https://recipe-backend-api.vercel.app/auth/login",
+          "https://recipe-backend-phi.vercel.app/auth/login",
           {
             username: value.username,
             password: value.password,
@@ -43,7 +43,10 @@ const LoginForm = ({ onSubmit, onclick }) => {
         );
         if (response.data.message === "Wrong Password") {
           toast.error("Invalid Credentials", toastVariable);
-        } else {
+        } 
+        else if (response.data.message === "User does not Exist") {
+          toast.error("User does not Exist", toastVariable);
+        }else {
           setCookies("access", response.data.token);
           window.localStorage.setItem("userID", response.data.userID);
           navigate("/");

@@ -44,7 +44,7 @@ const CreateRecipe = () => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://recipe-backend-api.vercel.app/recipes/createRecipe',
+        url: 'https://recipe-backend-phi.vercel.app/recipes/createRecipe',
         data : recipe
       };
       
