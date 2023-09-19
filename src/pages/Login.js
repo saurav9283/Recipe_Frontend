@@ -35,7 +35,7 @@ const LoginForm = ({ onSubmit, onclick }) => {
     if (handleValidation()) {
       try {
         const response = await axios.post(
-          "http://localhost:3001/auth/login",
+          "https://recipe-backend-phi.vercel.app/auth/login",
           {
             username: value.username,
             password: value.password,

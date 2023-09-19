@@ -38,7 +38,7 @@ const Home = () => {
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes/savedRecipe/ids/${userID}`
+          `https://recipe-backend-phi.vercel.app/recipes/savedRecipe/ids/${userID}`
         );
         setsavedRecipe(response.data.savedRecipe);
       } catch (error) {
@@ -56,7 +56,7 @@ const Home = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/recipes/${userID}`,
+        `https://recipe-backend-phi.vercel.app/recipes/${userID}`,
         { recipeID },
         { headers: { authorization: cookies.access } }
       );

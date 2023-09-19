@@ -60,7 +60,7 @@ const CreateRecipe = () => {
       //   .catch((error) => {
       //     console.log(error);
       //   });
-      const response = await axios.post("http://localhost:3001/recipes",recipe);
+      const response = await axios.post("https://recipe-backend-phi.vercel.app/recipes",recipe);
       console.log(response)
       alert("saved")
     } catch (error) {
