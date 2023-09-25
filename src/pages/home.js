@@ -4,6 +4,8 @@ import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
 import { useGetUserID } from "../hooks/useGetuserID";
 import "../pages/home.css";
+import toast from "react-hot-toast";
+
 const Home = () => {
   const [recipe, setRecipe] = useState([]);
   const [savedRecipe, setsavedRecipe] = useState([]);
@@ -39,13 +41,16 @@ const Home = () => {
 
   const saveRecipe = async (recipeID) => {
     console.log(recipeID);
-
     try {
       const response = await axios.put(
         `https://recipe-backend-phi.vercel.app/recipes/${userID}`,
         { recipeID },
         { headers: { authorization: cookies.access } }
       );
+      toast.success("Recipe Saved", {
+        duration: 4000,
+        position: "top-center",
+      });
       setsavedRecipe(response.data.savedRecipe);
     } catch (error) {
       console.log(error);
