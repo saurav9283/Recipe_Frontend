@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useGetUserID } from "../hooks/useGetuserID";
+import Swal from 'sweetalert2'
 
 const CreateRecipe = () => {
   const [cookies, setCookies] = useCookies(["access"]);
@@ -15,6 +16,7 @@ const CreateRecipe = () => {
     userOwner: useGetUserID(),
   });
   const navigate = useNavigate();
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,29 +42,15 @@ const CreateRecipe = () => {
         return alert("Login to add");
       }
       recipe.userOwner = a;
-
-
-      // let config = {
-      //   method: "post",
-      //   maxBodyLength: Infinity,
-      //   url: "http://localhost:3001/recipes/createRecipe",
-      //   data: recipe,
-      // };
-
-      // axios
-      //   .request(config)
-      //   .then((response) => {
-      //     console.log(config.data);
-      //     console.log(JSON.stringify(response.data));
-      //     alert(response.data.message);
-      //     navigate("/");
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
       const response = await axios.post("https://recipe-backend-phi.vercel.app/recipes",recipe);
       console.log(response)
-      alert("saved")
+      Swal.fire({
+        icon: 'success',
+        title: 'Recipe Created!',
+        text: 'Your recipe has been successfully created.',
+      });
+      navigate('/')
+      // alert("saved")
     } catch (error) {
       console.log(" error while adding");
     }

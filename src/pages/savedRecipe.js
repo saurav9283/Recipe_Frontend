@@ -1,56 +1,71 @@
 import axios from "axios";
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetUserID } from "../hooks/useGetuserID";
 import { useCookies } from "react-cookie";
+import Swal from 'sweetalert2';
+
 const SavedRecipe = () => {
   const [cookies, setCookies] = useCookies(["access"]);
-  const [savedRecipe, setsavedRecipe] = useState([]);
-  const [ischange , setchange] = useState(false);
+  const [savedRecipe, setSavedRecipe] = useState([]);
+  const [isChange, setIsChange] = useState(false);
 
   const userID = useGetUserID();
+  
   useEffect(() => {
     const fetchSavedRecipe = async () => {
       try {
-        const response = await axios.get(
-          `https://recipe-backend-phi.vercel.app/recipes/savedRecipe/${userID}`
-        );
-        setsavedRecipe(response.data);
-        console.log(response.data);
+        if (cookies.access) {
+          const response = await axios.get(
+            `https://recipe-backend-phi.vercel.app/recipes/savedRecipe/${userID}`
+          );
+          setSavedRecipe(response.data);
+          console.log(response.data);
+        }
       } catch (error) {
-        console.log("error");
+        console.error(error);
       }
     };
-    if (cookies.access) {
-      fetchSavedRecipe();
-    }
-  }, [ischange]);
+
+    fetchSavedRecipe();
+  }, [isChange]);
+
   const removeRecipe = async (recipeID) => {
-    try {
-      const response = await axios.put(
-        `https://recipe-backend-phi.vercel.app/recipes/remove/${userID}`,
-        { recipeID },
-        {
-          headers: {
-            Authorization: cookies.access,
-          },
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.put(
+            `https://recipe-backend-phi.vercel.app/recipes/remove/${userID}`,
+            { recipeID },
+            {
+              headers: {
+                Authorization: cookies.access,
+              },
+            }
+          );
+          setIsChange(!isChange);
+          Swal.fire('Deleted!', 'Your recipe has been deleted.', 'success');
+        } catch (error) {
+          console.error(error);
         }
-      );
-      console.log(response.data)
-      setchange(!ischange)
-    } catch (error) {
-      console.error(error);
-    }
+      }
+    });
   };
 
   return (
     <div className="home">
       {cookies.access ? <h1>Saved Recipes</h1> : <h1>Login to View</h1>}
       {savedRecipe?.length === 0 ? (
-        <h1>Ahhh.. Add something to your List</h1>
-      ) : (
-        <></>
-      )}
+        <h1>Ahhh... Add something to your List</h1>
+      ) : null}
+
       <div className="card-container">
         {savedRecipe?.map((recipe) => (
           <div key={recipe._id} className="main-card">

@@ -3,26 +3,12 @@ import React from "react";
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
 import { useGetUserID } from "../hooks/useGetuserID";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "../pages/home.css";
 const Home = () => {
   const [recipe, setRecipe] = useState([]);
   const [savedRecipe, setsavedRecipe] = useState([]);
   const [cookies, setCookies] = useCookies(["access"]);
   const userID = useGetUserID();
-
-  const toastVariable = {
-    position: "top-right",
-    autoClose: 4000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
-
-  const showSuccessToast = () => {
-    toast.success("Login Successful", toastVariable);
-  };
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -103,7 +89,6 @@ const Home = () => {
           </div>
         ))}
       </div>
-        <ToastContainer />
     </div>
   );
 };

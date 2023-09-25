@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 import "../pages/Login.css";
 
 const LoginForm = ({ onSubmit, onclick }) => {
@@ -13,18 +12,15 @@ const LoginForm = ({ onSubmit, onclick }) => {
     password: "",
   });
   const navigate = useNavigate();
-  const toastVariable = {
-    position: "top-right",
-    autoClose: 4000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
+ 
 
   const handleValidation = () => {
     const { username, password } = value;
     if (password === "" || username === "") {
-      toast.error("Username and Password are required", toastVariable);
+      toast.error("Username and Password are required", {
+        duration: 4000,
+        position: "top-center",
+      });
       return false;
     }
     return true;
@@ -42,19 +38,36 @@ const LoginForm = ({ onSubmit, onclick }) => {
           }
         );
         if (response.data.message === "Wrong Password") {
-          toast.error("Invalid Credentials", toastVariable);
+          toast.error("Invalid Credentials", {
+            duration: 4000,
+            position: "top-center",
+          });
         } 
         else if (response.data.message === "User does not Exist") {
-          toast.error("User does not Exist", toastVariable);
+          toast.error("User does not Exist", {
+            duration: 4000,
+            position: "top-center",
+          });
         }else {
           setCookies("access", response.data.token);
           window.localStorage.setItem("userID", response.data.userID);
           navigate("/");
-          toast.success("Login Successful", toastVariable);
+          toast.success("Login Successful", {
+            duration: 4000,
+            position: "top-center",
+            style: {
+              background: "white", 
+              color: "green",      
+              borderRadius: "8px", 
+            }
+          });
         }
       } catch (error) {
         console.log(error);
-        toast.error("An error occurred", toastVariable);
+        toast.error("An error occurred", {
+          duration: 4000,
+          position: "top-center",
+        });
       }
     }
   };

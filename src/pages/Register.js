@@ -1,28 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
+
 import "../pages/Register.css";
 
 const RegisterForm = ({ onclick }) => {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [value, setValue] = useState({
     name: "",
     username: "",
-    password:""
+    password: "",
   });
-
-  const toastVariable = {
-    position: "top-right",
-    autoClose: 4000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,14 +24,22 @@ const RegisterForm = ({ onclick }) => {
         }
       );
       if (response.data.message === "User Already Exist!") {
-        toast.error("User Already Exist!", toastVariable);
+        toast.error("User Already Exist!", {
+          duration: 4000,
+          position: "top-center",
+        });
       } else if (response.data.message === "user registered") {
-        toast.success("User registered", toastVariable);
+        toast.success("User Already Exist!", {
+          duration: 4000,
+          position: "top-center",
+        });
         onclick();
-      } else{
-        toast.error("An error occurred. Please try again later.", toastVariable);
+      } else {
+        toast.error("An error occurred. Please try again later.", {
+          duration: 4000,
+          position: "top-center",
+        });
       }
-      
     } catch (error) {
       console.error("Error:", error);
     }
@@ -59,23 +55,24 @@ const RegisterForm = ({ onclick }) => {
           placeholder="Name"
           value={value.name}
           onChange={(event) => setValue({ ...value, name: event.target.value })}
-          
         />
         <input
           className="formInput"
           type="text"
           placeholder="UserName"
           value={value.username}
-          onChange={(event) => setValue({ ...value, username: event.target.value })}
-          
+          onChange={(event) =>
+            setValue({ ...value, username: event.target.value })
+          }
         />
         <input
           className="formInput"
           type="password"
           placeholder="Password"
           value={value.password}
-          onChange={(event) => setValue({ ...value, password: event.target.value })}
-          
+          onChange={(event) =>
+            setValue({ ...value, password: event.target.value })
+          }
         />
         <br></br>
         <button className="formButton" type="submit">
@@ -85,6 +82,7 @@ const RegisterForm = ({ onclick }) => {
           Already have an account? Login
         </p>
       </form>
+      
     </div>
   );
 };
