@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useGetUserID } from "../hooks/useGetuserID";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Swal from 'sweetalert2';
+import { Navigate } from "react-router-dom";
 
 const SavedRecipe = () => {
   const [cookies, setCookies] = useCookies(["access"]);
@@ -10,6 +12,7 @@ const SavedRecipe = () => {
   const [isChange, setIsChange] = useState(false);
 
   const userID = useGetUserID();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const fetchSavedRecipe = async () => {
@@ -52,6 +55,7 @@ const SavedRecipe = () => {
           );
           setIsChange(!isChange);
           Swal.fire('Deleted!', 'Your recipe has been deleted.', 'success');
+          navigate('/')
         } catch (error) {
           console.error(error);
         }
