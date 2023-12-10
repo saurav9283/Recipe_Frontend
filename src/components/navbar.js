@@ -60,10 +60,12 @@ const NavbarLink = styled(NavLink)`
 
   &:hover {
     color: #777;
+    border-bottom: 3px solid black;
   }
 
   &.active {
     color: black;
+    border-bottom: 3px solid black;
   }
 `;
 

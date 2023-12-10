@@ -29,7 +29,7 @@ const RegisterForm = ({ onclick }) => {
           position: "top-center",
         });
       } else if (response.data.message === "user registered") {
-        toast.success("User Already Exist!", {
+        toast.error("User Already Exist!", {
           duration: 4000,
           position: "top-center",
         });
