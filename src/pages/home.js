@@ -1,15 +1,16 @@
 import axios from "axios";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useState, useEffect } from "react";
 import { useGetUserID } from "../hooks/useGetuserID";
 import "../pages/home.css";
 import toast from "react-hot-toast";
+import load from "../hooks/load.gif";
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState([]);
-  const [savedRecipe, setsavedRecipe] = useState([]);
-  const [cookies, setCookies] = useCookies(["access"]);
+  const [savedRecipe, setSavedRecipe] = useState([]);
+  const [cookies] = useCookies(["access"]);
   const userID = useGetUserID();
 
   useEffect(() => {
@@ -19,28 +20,30 @@ const Home = () => {
           "https://recipe-backend-phi.vercel.app/recipes"
         );
         setRecipe(response.data);
+        setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.log(error);
       }
     };
+
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
           `https://recipe-backend-phi.vercel.app/recipes/savedRecipe/ids/${userID}`
         );
-        setsavedRecipe(response.data.savedRecipe);
+        setSavedRecipe(response.data.savedRecipe);
       } catch (error) {
-        console.log("error");
+        console.log(error);
       }
     };
+
     fetchRecipe();
     if (cookies.access) {
       fetchSavedRecipe();
     }
-  }, []);
+  }, [cookies.access, userID]); // Added dependencies for useEffect
 
   const saveRecipe = async (recipeID) => {
-    console.log(recipeID);
     try {
       const response = await axios.put(
         `https://recipe-backend-phi.vercel.app/recipes/${userID}`,
@@ -51,49 +54,55 @@ const Home = () => {
         duration: 4000,
         position: "top-center",
       });
-      setsavedRecipe(response.data.savedRecipe);
+      setSavedRecipe(response.data.savedRecipe);
     } catch (error) {
       console.log(error);
     }
   };
+
   const isRecipeSaved = (id) => {
-    console.log(saveRecipe)
     return savedRecipe?.includes(id);
   };
+
   return (
     <div className="home">
       <h1>BestFOODs here</h1>
-      <div className="card-container">
-        {recipe?.map((recipe) => (
-          <div key={recipe._id} className="main-card">
-            <div>
-              <h2>{recipe.name}</h2>
-              <hr />
+      {loading ? ( // Display the loading GIF if loading state is true
+        <img src={load} alt="Loading..." />
+      ) : (
+        <div className="card-container">
+          {/* Render recipe cards once the data is loaded */}
+          {recipe?.map((recipe) => (
+            <div key={recipe._id} className="main-card">
+              <div>
+                <h2>{recipe.name}</h2>
+                <hr />
+              </div>
+              <div className="instructions">
+                <p>{recipe.instruction}</p>
+              </div>
+              <img src={recipe.imageURL} alt={recipe.name} />
+              <div className="card-footer">
+                <p>Cooking Time: {recipe.cookingTime} minutes</p>
+                {cookies.access ? (
+                  <button
+                    className="saveButton"
+                    onClick={() => {
+                      saveRecipe(recipe._id);
+                      isRecipeSaved(recipe._id);
+                    }}
+                    disabled={isRecipeSaved(recipe._id)}
+                  >
+                    {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
+                  </button>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-            <div className="instructions">
-              <p>{recipe.instruction}</p>
-            </div>
-            <img src={recipe.imageURL} alt={recipe.name} />
-            <div className="card-footer">
-              <p>Cooking Time: {recipe.cookingTime} minutes</p>
-              {cookies.access ? (
-                <button
-                  className="saveButton"
-                  onClick={() => {
-                    saveRecipe(recipe._id);
-                    isRecipeSaved(recipe._id);
-                  }}
-                  disabled={isRecipeSaved(recipe._id)}
-                >
-                  {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-                </button>
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
