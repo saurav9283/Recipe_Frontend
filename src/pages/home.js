@@ -25,22 +25,7 @@ const Home = () => {
         console.log(error);
       }
     };
-
-    const fetchSavedRecipe = async () => {
-      try {
-        const response = await axios.get(
-          `https://recipe-backend-phi.vercel.app/recipes/savedRecipe/ids/${userID}`
-        );
-        setSavedRecipe(response.data.savedRecipe);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchRecipe();
-    if (cookies.access) {
-      fetchSavedRecipe();
-    }
   }, [cookies.access, userID]); // Added dependencies for useEffect
 
   const saveRecipe = async (recipeID) => {
