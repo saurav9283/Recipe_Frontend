@@ -4,7 +4,6 @@ import { useGetUserID } from "../hooks/useGetuserID";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Swal from 'sweetalert2';
-import { Navigate } from "react-router-dom";
 
 const SavedRecipe = () => {
   const [cookies, setCookies] = useCookies(["access"]);

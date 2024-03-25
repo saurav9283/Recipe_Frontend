@@ -16,7 +16,8 @@ const RegisterForm = ({ onclick }) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "https://recipe-backend-phi.vercel.app/auth/register",
+        "http://localhost:3001/auth/register",
+        // "https://recipe-backend-phi.vercel.app/auth/register",
         {
           name: value.name,
           username: value.username,
@@ -58,8 +59,8 @@ const RegisterForm = ({ onclick }) => {
         />
         <input
           className="formInput"
-          type="text"
-          placeholder="UserName"
+          type="email"
+          placeholder="Enter your email"
           value={value.username}
           onChange={(event) =>
             setValue({ ...value, username: event.target.value })
